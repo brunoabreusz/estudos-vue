@@ -10,14 +10,44 @@
 </head>
 <body>
     <div id="app">
-        <h1>{{mensagem}}</h1>
+        <h1 v-if="numero > 4">O numero é maior do que 4</h1>
+        <h1 v-else-if="numero == 4">O numero é igual a 4</h1>
+        <hr>
+        <input type="text" v-model="conteudo" placeholder="Digite">
+        <p>{{conteudo}}</p>
+        <hr>
+        <ul v-for="lista in listas">
+            <li>id: <b>{{lista.id}}</b> </li>
+            <li>nome: <b>{{lista.nome}}</b> </li>
+            <li>idioma: <b>{{lista.idioma}}</b> </li>
+        </ul>
+                 <!-- 12/07 | s29:45 -->
+                 <!-- https://youtu.be/Uo7iciQYYTo -->
     </div>
 
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                mensagem: 'Olá, Vue.Js'
+                true: 'Mensagem true',
+                false: 'Mensagem false',
+                listas: [
+                    {
+                    id: 1,
+                    nome: 'Bruno',
+                    idioma: "pt-br",
+                    },
+                    {
+                    id: 2,
+                    nome: 'Necas',
+                    idioma: "pt-br",
+                    }
+                
+            ],
+
+                verifica: true,
+                numero: 4,
+                conteudo: ''
             }
         });
     </script>
