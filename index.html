@@ -5,57 +5,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
+    <!-- Vue.js only -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <title>VueJs</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <title>VueCoin</title>
 </head>
 <body>
     <div id="app">
-        <h1 v-if="numero > 4">O numero é maior do que 4</h1>
-        <h1 v-else-if="numero == 4">O numero é igual a 4</h1>
-        <hr>
-        <input type="text" v-model="conteudo" placeholder="Digite">
-        <p>{{conteudo}}</p>
-        <hr>
-        <ul v-for="lista in listas">
-            <li>id: <b>{{lista.id}}</b> </li>
-            <li>nome: <b>{{lista.nome}}</b> </li>
-            <li>idioma: <b>{{lista.idioma}}</b> </li>
+        <h1>{{titulo}}</h1>
+
+        <ul v-for="info in infos">
+            <li>
+               <h3><strong v-html="info.symbol"></strong> {{ info.code }}</h3> 
+                <ul>
+                    <li>descrição: {{ info.description }}</li>
+                    <li>valor: {{ info.rate }}</li>
+                    <li>flutuante: {{ info.rate_float }}</li>
+                </ul>
+            </li>
         </ul>
-                 <!-- 12/07 | s29:45 -->
-                 <!-- https://youtu.be/Uo7iciQYYTo -->
-        <hr>
-        <one-component></one-component>
+
     </div>
 
     <script>
 
-        Vue.component( 'one-component', { template: '<p>Primeiro de muitos</p>'} )
-
-
         var app = new Vue({
             el: '#app',
             data: {
-                true: 'Mensagem true',
-                false: 'Mensagem false',
-                listas: [
-                    {
-                    id: 1,
-                    nome: 'Bruno',
-                    idioma: "pt-br",
-                    },
-                    {
-                    id: 2,
-                    nome: 'Necas',
-                    idioma: "pt-br",
-                    }
-                
-            ],
+                titulo: 'Preços do Bitcoin',
+                infos: []
+            },
 
-                verifica: true,
-                numero: 4,
-                conteudo: ''
+            mounted() {
+                axios.get("https://api.coindesk.com/v1/bpi/currentprice.json").then( response => ( this.infos = response.data.bpi))
             }
-        });
+                
+            });
+
     </script>
 
 </body>
