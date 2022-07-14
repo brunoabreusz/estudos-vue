@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,28 +9,39 @@
     <!-- Vue.js only -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <title>VueCoin</title>
 </head>
+
 <body>
     <div id="app">
-        <h1>{{titulo}}</h1>
 
-        <ul v-for="info in infos">
-            <li>
-               <h3><strong v-html="info.symbol"></strong> {{ info.code }}</h3> 
-                <ul>
-                    <li>descrição: {{ info.description }}</li>
-                    <li>valor: {{ info.rate }}</li>
-                    <li>flutuante: {{ info.rate_float }}</li>
-                </ul>
-            </li>
-        </ul>
+        <p>{{aula1.descri}}</p>
+        <div class="container" v-for="info in infos">
+            <ul class="row">
+                <div>
+                    <li>
+                        <h3><strong v-html="info.symbol"></strong> {{ info.code }}</h3>
+                        <ul>
+                            <li>descrição: {{ info.description }}</li>
+                            <li>valor: {{ info.rate }}</li>
+                            <li>flutuante: {{ info.rate_float }}</li>
+                        </ul>
+                    </li>
+                </div>
+            </ul>
+        </div>
+
+        <hr>
+
 
     </div>
 
@@ -38,17 +50,22 @@
         var app = new Vue({
             el: '#app',
             data: {
-                titulo: 'Preços do Bitcoin',
+                aula1: {
+                    link: "https://www.youtube.com/watch?v=Uo7iciQYYTo",
+                    descri: "Utilizei a api coindesk pegando algumas informações sobrea as moeadas. junto com o axios."
+                },
                 infos: []
+
             },
 
             mounted() {
-                axios.get("https://api.coindesk.com/v1/bpi/currentprice.json").then( response => ( this.infos = response.data.bpi))
+                axios.get("https://api.coindesk.com/v1/bpi/currentprice.json").then(response => (this.infos = response.data.bpi))
             }
-                
-            });
+
+        });
 
     </script>
 
 </body>
+
 </html>

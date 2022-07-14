@@ -18,5 +18,12 @@ body{
     }
   }
 
+ul {
+  background-color: #fff;
+  display: inline-block;
+  align-items: center;
+  border-radius: 10px;
+}
+
 
   
